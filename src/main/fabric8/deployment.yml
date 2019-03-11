@@ -1,0 +1,54 @@
+spec:
+  template:
+    spec:
+      serviceAccountName: ${project.artifactId}-sa
+      containers:
+      - name: ${project.artifactId}
+        env:
+        - name: SPRING_CONFIG_LOCATION
+          value: file:/etc/config/
+        resources:
+          requests:
+            cpu: "0.5"
+          limits:
+            cpu: "4.0"
+        volumeMounts:
+        - name: ${project.artifactId}-configmap-vol
+          mountPath: /etc/config
+          readOnly: true
+        - name: ${project.artifactId}-cert-vol
+          mountPath: /etc/secret
+          readOnly: true
+        - name: ${project.artifactId}-alice-vol
+          mountPath: /etc/secret
+          readOnly: true
+        - name: ${project.artifactId}-bob-vol
+          mountPath: /etc/secret
+          readOnly: true
+      volumes:
+      - name: ${project.artifactId}-configmap-vol
+        configMap:
+          name: ${project.artifactId}-configmap
+      - name: ${project.artifactId}-cert-vol
+        secret:
+          secretName: my-cluster-cluster-ca-cert
+          items:
+          - key: ca.crt
+            path: ca.crt
+      - name: ${project.artifactId}-alice-vol
+        secret:
+          secretName: alice
+          items:
+          - key: user.crt
+            path: alice.crt
+          - key: user.key
+            path: alice.key
+      - name: ${project.artifactId}-cert-vol
+        secret:
+          secretName: bob
+          items:
+          - key: user.crt
+            path: bob.crt
+          - key: user.key
+            path: bob.key
+            
