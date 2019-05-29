@@ -1,0 +1,28 @@
+# Servlet Container & Health Setup
+server:
+  address: 0.0.0.0
+management:
+  address: 0.0.0.0
+endpoints:
+  enabled: false
+  health:
+    enabled: true
+
+# Camel Spring Boot
+camel:
+  springboot:
+    name: camel-kafka-scram
+  component:
+    kafka.configuration:
+      brokers: my-cluster-kafka-bootstrap:9092
+      security-protocol: SASL_PLAINTEXT
+      sasl-mechanism: SCRAM-SHA-512
+      sasl-jaas-config: org.apache.kafka.common.security.scram.ScramLoginModule required username="bob" password="${KAFKA_USER_PASSWORD}";
+    
+# Logging
+logging:
+  config: classpath:logback.xml
+  level:
+    #org.apache: DEBUG
+    #org.apache.camel: DEBUG
+    org.apache.camel.examples: DEBUG

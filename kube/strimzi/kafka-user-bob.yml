@@ -1,0 +1,26 @@
+apiVersion: kafka.strimzi.io/v1alpha1
+kind: KafkaUser
+metadata:
+  name: bob
+  namespace: strimzi
+  labels:
+    strimzi.io/cluster: my-cluster
+spec:
+  authentication:
+    type: scram-sha-512
+  authorization:
+    type: simple
+    acls:
+      - resource:
+          type: topic
+          name: my-topic
+        operation: Read
+      - resource:
+          type: topic
+          name: my-topic
+        operation: Describe
+      - resource:
+          type: group
+          name: Consumer
+          patternType: prefix
+        operation: Read

@@ -1,0 +1,34 @@
+# Servlet Container & Health Setup
+server:
+  address: 0.0.0.0
+management:
+  address: 0.0.0.0
+endpoints:
+  enabled: false
+  health:
+    enabled: true
+
+# Camel Spring Boot
+camel:
+  springboot:
+    name: camel-kafka-tls
+  component:
+    kafka.configuration:
+      brokers: my-cluster-kafka-bootstrap:9093
+      #brokers: my-cluster-kafka-bootstrap-strimzi.192.168.99.118.nip.io:443
+      security-protocol: SSL
+      ssl-truststore-location: client.ts
+      ssl-truststore-password: password
+      ssl-truststore-type: PKCS12
+      ssl-keystore-location: client.ks
+      ssl-keystore-password: password
+      ssl-keystore-type: PKCS12
+      
+    
+# Logging
+logging:
+  config: classpath:logback.xml
+  level:
+    #org.apache: DEBUG
+    #org.apache.camel: DEBUG
+    org.apache.camel.examples: DEBUG

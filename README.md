@@ -23,11 +23,11 @@ mvn spring-boot:run
 ## Running the example in OpenShift
 
 ```
-oc new-project demo-fuse
+oc new-project fuse
 oc create -f src/main/kube/alice.yml
 oc create -f src/main/kube/bob.yml
 oc create -f src/main/kube/serviceaccount.yml
 oc create -f src/main/kube/configmap.yml
-oc policy add-role-to-user view system:serviceaccount:strimzi:camel-kafka-authz-sa
-mvn clean install fabric8:resource fabric8:build fabric8:deploy
+oc policy add-role-to-user view system:serviceaccount:fuse:camel-kafka-authz-sa
+mvn -P openshift clean install fabric8:deploy
 ```

@@ -1,0 +1,38 @@
+spec:
+  template:
+    spec:
+      serviceAccountName: ${project.artifactId}-sa
+      containers:
+      - name: ${project.artifactId}
+        env:
+        - name: SPRING_CONFIG_LOCATION
+          value: file:/etc/config/
+        - name: KAFKA_CLUSTER_CRT
+          valueFrom:
+            secretKeyRef:
+              name: ${kafka.cluster-name}-cluster-ca-cert
+              key: ca.crt
+        - name: KAFKA_USER_CRT
+          valueFrom:
+            secretKeyRef:
+              name: ${kafka.username}
+              key: user.crt
+        - name: KAFKA_USER_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ${kafka.username}
+              key: user.key
+        resources:
+          requests:
+            cpu: "0.5"
+          limits:
+            cpu: "1.0"
+        volumeMounts:
+        - name: ${project.artifactId}-configmap-vol
+          mountPath: /etc/config
+          readOnly: true
+      volumes:
+      - name: ${project.artifactId}-configmap-vol
+        configMap:
+          name: ${project.artifactId}-configmap
+            
