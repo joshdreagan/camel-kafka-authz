@@ -18,7 +18,7 @@ Create a Kafka broker cluster, topic, and users
 
 ```
 cd $PROJECT_ROOT
-oc apply -f ./kube/strimzi/
+oc apply -f ./kube/strimzi/ -n strimzi
 ```
 
 Create the "fuse" project and the "secret sync" CronJobs
@@ -26,7 +26,7 @@ Create the "fuse" project and the "secret sync" CronJobs
 ```
 cd $PROJECT_ROOT
 oc new-project fuse
-oc apply -f ./kube/fuse/
+oc apply -f ./kube/fuse/ -n fuse
 ```
 
 Build the project source code and deploy to OpenShift
