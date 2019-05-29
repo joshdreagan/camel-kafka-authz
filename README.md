@@ -13,6 +13,8 @@ Install the AMQ Streams "Cluster Operator" according to the "Getting Started" do
 __Notes:__
 - Assume all steps are run as a user with "clusteradmin" privileges for simplicity. 
 - The provided configs assume that the broker will be installed in an OpenShift namespace named "strimzi", and that the Fuse/Spring Boot apps will be deployed in an OpenShift namespace named "fuse".
+- The application in (camel-kafka-tls)[./camel-kafka-tls] contains an client that uses TLS to authenticate (as user "alice") and produce messages.
+- The application in (camel-kafka-scram)[./camel-kafka-scram] contains an client that uses SCRAM-SHA-512 to authenticate (as user "bob") and consume messages.
 
 Create a Kafka broker cluster, topic, and users
 
