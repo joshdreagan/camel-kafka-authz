@@ -35,10 +35,6 @@
       <artifactId>camel-kafka-starter</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.heroku.sdk</groupId>
-      <artifactId>env-keystore</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
