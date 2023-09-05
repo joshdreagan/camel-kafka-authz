@@ -29,7 +29,7 @@
 
     <camel.version>2.21.0</camel.version>
     <spring-boot.version>1.5.16.RELEASE</spring-boot.version>
-    <kafka-client.version>2.2.0</kafka-client.version>
+    <kafka-client.version>2.6.3</kafka-client.version>
     <env-keystore.version>1.1.1</env-keystore.version>
   </properties>
 
